@@ -53,5 +53,24 @@ class LinkedList:
         else:
             node = self.head
             node_index = 0
-            while node_index != index:
-                # TODO: increment node_index and travel through llist
+            while node.next:
+                if node_index == index: break # if indexes match, break and insert new node
+                else:
+                    node = node.next
+                    node_index += 1
+            else: # Node not found
+                raise IndexError("Linked list index out of range.")
+            
+            #TODO: insert node here
+            
+    def remove_node(self, data) -> None:
+        """Removes a node that matches the given data."""
+        node = self.head
+        while node.next:
+            if node.data == data: break # break if node data matches given data
+            else: node = node.next
+        else: # node not found
+            raise ValueError("Data not in linked list.")
+
+        # node found
+        
