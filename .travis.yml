@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.7.5"
+
+before_install:
+  - python --version
+  - python3 --version
+  - pip3 install -U pip
+  - pip3 install -U pytest
+  - pip3 install -U pytest-cov
+  - pip3 install -U codecov
+  - pip3 install -U sentry-sdk==0.14.1
+
+install:
+  - pip install -r requirements.txt
+  
+script:
+  - pytest --cov=stack
+
+after:
+  - bash <(curl -s https://codecov.io/bash)
