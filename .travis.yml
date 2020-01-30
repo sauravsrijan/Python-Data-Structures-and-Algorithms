@@ -3,16 +3,11 @@ python:
   - "3.7.5"
 
 before_install:
-  - python --version
-  - python3 --version
-  - pip3 install -U pip
-  - pip3 install -U pytest
-  - pip3 install -U pytest-cov
-  - pip3 install -U codecov
-  - pip3 install -U sentry-sdk==0.14.1
-
-install:
-  - pip install -r requirements.txt
+  - pip install -U pip
+  - pip install -U pytest
+  - pip install -U pytest-cov
+  - pip install -U codecov
+  - pip install -U sentry-sdk==0.14.1
   
 script:
   - pytest --cov=stack
