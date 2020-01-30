@@ -12,5 +12,5 @@ before_install:
 script:
   - pytest --cov=stack
 
-after:
+after_succes:
   - bash <(curl -s https://codecov.io/bash)
