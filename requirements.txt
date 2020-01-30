@@ -1,0 +1,4 @@
+pytest
+pytest-cov
+codecov
+sentry-sdk==0.14.1

@@ -4,13 +4,15 @@ python:
 
 before_install:
   - pip install -U pip
-  - pip install -U pytest
-  - pip install -U pytest-cov
-  - pip install -U codecov
-  - pip install -U sentry-sdk==0.14.1
+
+install:
+  - pip install -r requirements.txt
   
 script:
-  - pytest --cov=stack
+  - pytest --cov=stack --verbose
 
-after_succes:
+after_success:
+  - coverage xml
+  - curl https://deepsource.io/cli | sh
+  - ./bin/deepsource report --analyzer test-coverage --key python --value-file ./coverage.xml
   - bash <(curl -s https://codecov.io/bash)
