@@ -1,9 +1,7 @@
 import pytest
-import sentry_sdk
 
 import stack
 
-sentry_sdk.init("https://f8c2cb0bb7714decbfd8b6f1be691d30@sentry.io/2083487")
 
 def setup_function(function):
     global s
