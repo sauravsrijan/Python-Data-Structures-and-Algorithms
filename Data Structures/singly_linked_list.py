@@ -27,8 +27,8 @@ class LinkedList:
 
     def __getitem__(self, key: int) -> Node:
         """Returns nodes on given key (index), does not support negative indexing smaller than -1 or slices."""
-        if (type(key) is slice): raise NotImplementedError("Slices have are not supported")
-        if (type(key) is not int): raise TypeError("indices must be integers")
+        if type(key) is slice: raise NotImplementedError("Slices have are not supported")
+        if type(key) is not int: raise TypeError("indices must be integers")
 
         pre_tests = (
             (key >= len(self.node_ids)), # index out of max range
