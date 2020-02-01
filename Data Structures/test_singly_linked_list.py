@@ -1,5 +1,8 @@
 import pytest
 
+import singly_linked_list
+
+
 def setup_function(function):
     global llist
     llist = singly_linked_list.LinkedList()
@@ -11,7 +14,7 @@ def test_append_len():
     for length,o in enumerate(objects, start=1):
         llist.append(o)
         assert len(llist) == length
-        assert llist.tail == o
+        assert llist.tail.data == o
 
 def test_str_repr():
     """Calling str() and repr() on a linked list should output the data in a tuple as a string."""
@@ -35,11 +38,12 @@ def test_getitem():
     
     for c in 'abcdefg': llist.append(c)
     
-    assert llist[0] == 'a'
-    assert llist[2] == 'c'
+    assert llist[0].data == 'a'
+    assert llist[1].data == 'b'
 
-    assert llist[-1] == 'g'
-    assert llist[-3] == 'e'
+    assert llist[-1].data == 'g'
+    assert llist[-3].data == 'e'
+    assert len(llist) == len('abcdefg')
 
 def test_setitem():
     """llist[n] == obj should insert obj at index n"""
@@ -59,20 +63,25 @@ def test_setitem():
     assert len(llist) == 1
     assert llist[0].data == 'new data'
 
-    for c in 'abc': llist.append(x)
+    for c in 'abc': llist.append(c)
 
     llist[1] = 'x'
 
     assert len(llist) == 4
     assert str(llist) == "('new data', 'x', 'b', 'c')"
 
+    llist[-1] = 'tail'
+
+    assert len(llist) == 4
+    assert str(llist) == "('new data', 'x', 'b', 'tail')"
+
 def test_prepend():
     """Doing llist.prepend(obj) should add a new node with data, obj, at the beginning of the linked list."""
     objects = ('a', 1, object(), ['list'], ('tuple',), {0: 'dict'}, {'set'})
-    for length,o in enumerate(objects, start=1k):
+    for length,o in enumerate(objects, start=1):
         llist.prepend(o)
         assert len(llist) == length
-        assert llist.head == o
+        assert llist.head.data == o
 
 def test_append_at_node():
     """Doing llist.append_at_node(node, obj), should add a new node containing data, obj, after the given node."""
@@ -120,7 +129,7 @@ def test_remove_node():
     node_3 = llist[2]
     llist.remove_node('c')
     assert llist[2] != node_3
-    assert len(llist) == 4
+    assert len(llist) == len('abccd') - 1
     assert str(llist) == "('a', 'b', 'c', 'd')"
     
     with pytest.raises(ValueError):

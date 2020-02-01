@@ -27,8 +27,8 @@ class LinkedList:
 
     def __getitem__(self, key: int) -> Node:
         """Returns nodes on given key (index), does not support negative indexing smaller than -1 or slices."""
-        if (type(key) is not int): raise TypeError("indices must be integers not str.")
         if (type(key) is slice): raise NotImplementedError("Slices have are not supported")
+        if (type(key) is not int): raise TypeError("indices must be integers")
 
         pre_tests = (
             (key >= len(self.node_ids)), # index out of max range
@@ -50,7 +50,9 @@ class LinkedList:
             return node # On index and key match, return node
 
     def __setitem__(self, key, value):
-        raise NotImplementedError(f"llist[{key}] = {value} not implemented... yet.")
+        """Replaces the node's data at index, 'key', with 'value'."""
+        if type(key) is slice: raise TypeError("indices must be integers, not slices")
+        self[key].data = value
     
     def append(self, data) -> None:
         """Adds (appends) a node to the end of the list."""
@@ -104,11 +106,17 @@ class LinkedList:
 
     def remove_node(self, data) -> None:
         """Removes a node that matches the given data."""
-        node = self.head
-        while node.next:
-            if node.data == data: break # break if node data matches given data
-            else: node = node.next
-        else: # node not found
+        if len(self.node_ids) == 0: raise ValueError(f"Data {data} not in linked list")
+        last_node = cur_node = self.head
+        while cur_node.next:
+            if cur_node.data == data: break # break if node data matches given data
+            else:
+                last_node = cur_node
+                cur_node = cur_node.next
+        else: # node NOT found
             raise ValueError(f"Data {data} not in linked list")
-
         # node found
+        last_node.next = cur_node.next
+        self.node_ids.remove(id(cur_node))
+        cur_node.data = cur_node.next = None # GC will take care of it 
+        
