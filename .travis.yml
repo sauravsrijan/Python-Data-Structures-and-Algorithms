@@ -15,5 +15,5 @@ script:
 
 after_success:
   - curl https://deepsource.io/cli | sh
-  - ./bin/deepsource report --analyzer test-coverage --key python --value-file ./coverage.xml
   - bash <(curl -s https://codecov.io/bash)
+  - ./bin/deepsource report --analyzer test-coverage --key python --value-file ./coverage.xml

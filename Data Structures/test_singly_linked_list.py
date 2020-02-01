@@ -118,8 +118,8 @@ def test_insert_at_index():
     llist.insert_at_index(0, 'head')
     assert str(llist) == "('head', 'a', 'X', 'b', 'c', 'tail')"
 
-    llist.insert_at_index(3, '3')
-    assert str(llist) == "('head', 'a', 'X', '3', 'b', 'c', 'tail')"
+    llist.insert_at_index(4, '3')
+    assert str(llist) == "('head', 'a', 'X', 'b', '3', 'c', 'tail')"
     assert len(llist) == 7
 
 def test_remove_node():
