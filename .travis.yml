@@ -10,6 +10,7 @@ install:
   - pip install -r requirements.txt
   
 script:
+  - chmod +x ./
   - pytest --cov=./ --cov-report=xml
 
 after_success:
